@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Baby Prints</title>
+</head>
+<body>
+  <h1>Products</h1>
+  <ul>
+    <% products.forEach(p => { %>
+      <li>
+        <a href="/product/<%= p.id %>"><%= p.title %></a> - $<%= p.price %>
+      </li>
+    <% }) %>
+  </ul>
+  <a href="/cart">View Cart</a>
+</body>
+</html>
