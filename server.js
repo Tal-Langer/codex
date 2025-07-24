@@ -102,6 +102,10 @@ app.get('/admin', ensureAdmin, (req, res) => {
   res.render('admin_dashboard', { products, orders });
 });
 
+app.get('/admin/page', ensureAdmin, (req, res) => {
+  res.render('admin_page');
+});
+
 app.post('/admin/logout', ensureAdmin, (req, res) => {
   req.session.destroy(() => {
     res.redirect('/');
