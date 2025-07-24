@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <form method="POST" action="/admin/logout"><button type="submit">Logout</button></form>
+  <h2>Add Product</h2>
+  <form method="POST" action="/admin/products">
+    <div><label>Title:</label><input type="text" name="title" required></div>
+    <div><label>Description:</label><textarea name="description" required></textarea></div>
+    <div><label>Price:</label><input type="number" name="price" step="0.01" required></div>
+    <div><label>Custom Fields (comma separated):</label><input type="text" name="customFields"></div>
+    <button type="submit">Add</button>
+  </form>
+  <h2>Existing Products</h2>
+  <ul>
+    <% products.forEach(p => { %>
+      <li><%= p.title %> ($<%= p.price %>)</li>
+    <% }) %>
+  </ul>
+  <h2>Orders</h2>
+  <ul>
+    <% orders.forEach(o => { %>
+      <li>
+        <strong>ID:</strong> <%= o.id %> - <%= o.status %>
+        <form method="POST" action="/admin/orders/<%= o.id %>/status">
+          <select name="status">
+            <option<%= o.status==='Pending'?' selected':'' %>>Pending</option>
+            <option<%= o.status==='Processing'?' selected':'' %>>Processing</option>
+            <option<%= o.status==='Completed'?' selected':'' %>>Completed</option>
+            <option<%= o.status==='Cancelled'?' selected':'' %>>Cancelled</option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
